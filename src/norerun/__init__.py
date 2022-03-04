@@ -10,10 +10,12 @@ class norerun:
             with open(file, 'rb') as f:
                 self._objects = pickle.load(f)
         else:
-            self._objects={}     
+            self._objects={} 
+            
     def _backup(self):
         with open(self._file,'wb') as f:
-            pickle.dump(self._objects, f)              
+            pickle.dump(self._objects, f)      
+            
     def format_key(self,func,args,kwargs):
             key=func.__name__
             key += "\n"+'#'*50+'\n'
@@ -29,6 +31,7 @@ class norerun:
                 dis(func, file=out)
                 key += out.getvalue()
             return key
+        
     def __call__(self,func):
         def inner(*args, **kwargs):
             key = self.format_key(func, args, kwargs)
@@ -39,7 +42,7 @@ class norerun:
                  self._backup()
                  return self._objects[key]
         return inner 
-
+    
     def flush(self):
         self._objects={}  
         self._backup()
