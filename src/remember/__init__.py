@@ -1,8 +1,6 @@
-#%%
 import pickle
 from dis import dis
 from os.path import exists
-import os
 from io import StringIO
 
 class Remember:
@@ -44,5 +42,9 @@ class Remember:
     def __delete__(self,instance):
         instance._objects={}
         os.remove(instance._file)
+    def flush(self):
+        self._objects={}  
+        self._backup()
+        
         
 remember=Remember()
