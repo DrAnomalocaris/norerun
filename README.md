@@ -3,8 +3,7 @@ Backup to store results of functions, so they do not need to be rerun.
 As long as the function is unchanged, and the inputs are the same
 
 ```
-from backup import backup
-
+from remember import remember
 @remember
 def len_file(textFile):
   #returns the number of characters in a text file
